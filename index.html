@@ -75,19 +75,19 @@ td:first-child{font-weight:700;color:var(--text);}
 </div>
 
 
-<div style="background:#000;margin:0;">
+<div id="video-container" style="position:sticky;top:0;z-index:100;background:#000;box-shadow:0 2px 12px rgba(0,0,0,.5);">
   <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-    <video id="tosca-video" controls preload="metadata"
+    <video id="tosca-video" controls preload="metadata" playsinline webkit-playsinline
       style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000;">
       <source src="https://takomwbzjpewssitofgo.supabase.co/storage/v1/object/public/media/tosca-ko.mp4" type="video/mp4">
     </video>
   </div>
-  <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-    <span style="color:#e63946;font-weight:700;font-size:12px;">🎬 한국어 자막 영상 · 720p</span>
-    <span style="font-size:11px;color:#888;">자막 899개 싱크 일치 · 어디서든 재생 가능</span>
+  <div style="background:#111;padding:8px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <span style="color:#e63946;font-weight:700;font-size:12px;">🎬 한국어 자막 영상</span>
+    <span style="font-size:11px;color:#888;">자막 899개 · 스크롤해도 영상 유지</span>
     <a href="https://takomwbzjpewssitofgo.supabase.co/storage/v1/object/public/media/tosca-ko.mp4" download
        style="margin-left:auto;background:#e63946;color:#fff;padding:5px 12px;border-radius:6px;text-decoration:none;font-size:11px;font-weight:700;">
-      📥 MP4 다운로드
+      📥 다운로드
     </a>
   </div>
 </div>
