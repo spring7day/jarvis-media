@@ -5,140 +5,467 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tricentis 웨비나: AI 시대 테스트 관리의 미래</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif; background: #fff; color: #1d1d1f; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* 스티키 비디오 */
-#video-wrap { position: sticky; top: 0; z-index: 100; background: #000; }
-#video-wrap video { display: block; width: 100%; max-height: 55vw; object-fit: contain; }
-.video-bar { background: #1d1d1f; padding: 8px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.video-bar span { color: #86868b; font-size: 12px; }
-.video-bar a { color: #2997ff; font-size: 12px; text-decoration: none; }
-.video-bar a:hover { text-decoration: underline; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    background: #fff;
+    color: #1d1d1f;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* 콘텐츠 */
-.content { max-width: 780px; margin: 0 auto; padding: 40px 20px 80px; }
-.tag { display: inline-block; background: #f2f2f7; color: #3a3a3c; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; margin-right: 6px; margin-bottom: 8px; }
-h1 { font-size: clamp(22px, 4vw, 32px); font-weight: 700; letter-spacing: -0.5px; line-height: 1.25; margin: 16px 0 8px; }
-.meta { color: #86868b; font-size: 13px; margin-bottom: 32px; }
-.lead { font-size: 17px; line-height: 1.6; color: #3d3d3f; margin-bottom: 40px; border-left: 3px solid #0071e3; padding-left: 16px; }
+  /* ── 영상 플레이어 (스티키) ── */
+  #video-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #000;
+  }
+  #video-wrap video {
+    width: 100%;
+    display: block;
+    max-height: 56vw;
+  }
+  .video-bar {
+    background: #1d1d1f;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .video-bar span { color: #86868b; font-size: 13px; }
+  .video-bar a {
+    margin-left: auto;
+    color: #2997ff;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .video-bar a:hover { text-decoration: underline; }
 
-/* 섹션 */
-.section { margin-bottom: 36px; }
-.section h2 { font-size: 18px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-.timestamp { background: #0071e3; color: #fff; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; font-family: monospace; }
-.section p { font-size: 15px; line-height: 1.7; color: #3d3d3f; }
+  /* ── 히어로 ── */
+  .hero {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 80px 24px 64px;
+  }
+  .hero-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #2997ff;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 5vw, 50px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    max-width: 820px;
+    margin: 0 auto 20px;
+  }
+  .hero-sub {
+    color: #86868b;
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+  .hero-chips {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .chip {
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+  }
 
-/* 인사이트 */
-.insights { background: #f5f5f7; border-radius: 16px; padding: 24px 28px; margin-bottom: 36px; }
-.insights h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
-.insights ul { list-style: none; }
-.insights li { padding: 10px 0; border-bottom: 1px solid #e5e5ea; font-size: 14px; line-height: 1.5; display: flex; gap: 10px; }
-.insights li:last-child { border-bottom: none; padding-bottom: 0; }
-.insights li::before { content: "💡"; flex-shrink: 0; }
+  /* ── 섹션 공통 ── */
+  .section { padding: 80px 24px; max-width: 980px; margin: 0 auto; }
+  .section-alt { background: #f5f5f7; }
+  .section-dark { background: #1d1d1f; color: #f5f5f7; }
 
-/* 발표자 */
-.speakers { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 36px; }
-.speaker { background: #f5f5f7; border-radius: 12px; padding: 16px 20px; flex: 1; min-width: 200px; }
-.speaker strong { display: block; font-size: 15px; margin-bottom: 4px; }
-.speaker span { font-size: 13px; color: #6e6e73; }
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #6e6e73;
+    margin-bottom: 8px;
+  }
+  .section-dark .section-label { color: #86868b; }
+  .section-title {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-desc {
+    color: #6e6e73;
+    font-size: 17px;
+    max-width: 680px;
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+  .section-dark .section-desc { color: #86868b; }
 
-/* Jarvis 분석 */
-.jarvis { background: #1d1d1f; color: #f5f5f7; border-radius: 16px; padding: 24px 28px; margin-bottom: 36px; }
-.jarvis h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #fff; }
-.jarvis p { font-size: 14px; line-height: 1.6; color: #a1a1a6; }
+  /* ── 카드 그리드 ── */
+  .grid { display: grid; gap: 20px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 
-@media (max-width: 480px) {
-  .content { padding: 24px 16px 60px; }
-  .video-bar { padding: 8px 16px; }
-  #video-wrap video { max-height: 56vw; }
-}
+  .card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.06);
+  }
+  .card-dark {
+    background: #2c2c2e;
+    border-radius: 18px;
+    padding: 28px;
+  }
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -.01em;
+  }
+  .card p, .card li {
+    font-size: 15px;
+    color: #6e6e73;
+    line-height: 1.6;
+  }
+  .card-dark p, .card-dark li { color: #86868b; }
+  .card-dark h3 { color: #f5f5f7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { padding: 6px 0; border-bottom: 1px solid #f0f0f2; }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li::before { content: "→ "; color: #2997ff; font-size: 13px; }
+
+  /* ── 수치 강조 ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2px; margin: 40px 0; }
+  .stat {
+    background: #f5f5f7;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .section-dark .stat { background: #2c2c2e; }
+  .stat-num {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: #1d1d1f;
+    line-height: 1;
+  }
+  .section-dark .stat-num { color: #f5f5f7; }
+  .stat-label {
+    font-size: 13px;
+    color: #6e6e73;
+    margin-top: 6px;
+  }
+
+  /* ── 타임라인 ── */
+  .timeline { list-style: none; padding: 0; }
+  .timeline li {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f2;
+    align-items: flex-start;
+  }
+  .timeline li:last-child { border-bottom: none; }
+  .tl-time {
+    font-size: 13px;
+    color: #2997ff;
+    font-weight: 600;
+    min-width: 52px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .tl-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .tl-desc { font-size: 14px; color: #6e6e73; line-height: 1.5; }
+
+  /* ── Jarvis 인사이트 ── */
+  .insight-list { list-style: none; padding: 0; }
+  .insight-list li {
+    padding: 20px 0;
+    border-bottom: 1px solid #2c2c2e;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .insight-list li:last-child { border-bottom: none; }
+  .insight-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .insight-text { font-size: 15px; color: #ababab; line-height: 1.6; }
+  .insight-text strong { color: #f5f5f7; }
+
+  /* ── 인용 ── */
+  blockquote {
+    border-left: 3px solid #2997ff;
+    padding: 16px 20px;
+    margin: 24px 0;
+    background: #f5f5f7;
+    border-radius: 0 12px 12px 0;
+    font-size: 15px;
+    color: #3d3d3f;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ── 푸터 ── */
+  footer {
+    background: #f5f5f7;
+    border-top: 1px solid #e8e8ed;
+    padding: 32px 24px;
+    text-align: center;
+    color: #6e6e73;
+    font-size: 13px;
+  }
+  footer a { color: #2997ff; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 56px 20px 48px; }
+    .section { padding: 56px 20px; }
+    .stat-num { font-size: 36px; }
+    .video-bar { padding: 8px 16px; }
+  }
 </style>
 </head>
 <body>
 
+<!-- ① 스티키 영상 -->
 <div id="video-wrap">
   <video controls preload="metadata" playsinline webkit-playsinline>
-    <source src="https://github.com/spring7day/jarvis-media/releases/download/v2.0/tosca-tm-ko.mp4" type="video/mp4">
+    <source src="https://github.com/spring7day/jarvis-media/releases/download/v2.0/tw2-ko-final.mp4" type="video/mp4">
   </video>
   <div class="video-bar">
-    <span>⏱ 약 38분</span>
-    <span>·</span>
-    <span>Tricentis · 2026</span>
-    <a href="https://github.com/spring7day/jarvis-media/releases/download/v2.0/tosca-tm-ko.mp4" download>MP4 다운로드 ↓</a>
-    <span style="margin-left:auto">🤵 Jarvis 기술 분석 리포트 · <a href="https://www.tricentis.com/resources/test-management-foundational-agentic-ai" target="_blank">원본 웨비나 ↗</a></span>
+    <span>🎬 한국어 자막 · 720p · 30분 51초</span>
+    <a href="https://github.com/spring7day/jarvis-media/releases/download/v2.0/tw2-ko-final.mp4" download>MP4 다운로드 ↓</a>
   </div>
 </div>
 
-<div class="content">
-  <span class="tag">Tricentis</span>
-  <span class="tag">Test Management</span>
-  <span class="tag">Agentic AI</span>
-  <span class="tag">QA</span>
-  <h1>AI 시대, 테스트 관리의 미래</h1>
-  <p class="meta">The future of test management in an AI-driven world · Tricentis 웨비나 · 한글 자막 (752개 블록 100% 번역)</p>
+<!-- ② 히어로 -->
+<div class="hero">
+  <div class="hero-label">Tricentis 웨비나 · 2026</div>
+  <h1>The future of test management<br>in an AI-driven world</h1>
+  <p class="hero-sub">Luke Mahon · Anand Patel — Tricentis AI 제품 &amp; qTest 제품팀</p>
+  <div class="hero-chips">
+    <span class="chip">⏱ 30분 51초</span>
+    <span class="chip">qTest</span>
+    <span class="chip">Agentic AI</span>
+    <span class="chip">Test Governance</span>
+    <span class="chip">Human-in-the-Loop</span>
+    <span class="chip">Jarvis 기술 분석</span>
+  </div>
+</div>
 
-  <p class="lead">AI 코딩 도구의 폭발적 확산으로 코드 생성 속도는 급격히 증가했지만, QA/품질 엔지니어링은 그 속도를 따라가지 못하고 심각한 병목이 되고 있다. 테스트 관리(가시성·추적성·확장성)가 Agentic AI 시대 품질 보증의 핵심 기반임을 논의한다.</p>
-
-  <h2 style="font-size:20px;margin-bottom:20px;">발표자</h2>
-  <div class="speakers">
-    <div class="speaker">
-      <strong>Luke Mahon</strong>
-      <span>AI 제품 마케팅 디렉터, Tricentis</span>
+<!-- ③ 핵심 수치 -->
+<div class="section-alt">
+  <div class="section" style="padding-top:64px;padding-bottom:64px;">
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">41%</div><div class="stat-label">현재 AI가 생성하는 코드 비율<br><span style="color:#2997ff;font-size:11px;">"역대 가장 낮은 수치"</span></div></div>
+      <div class="stat"><div class="stat-num">4개</div><div class="stat-label">테스트 관리의 핵심 니즈<br>가시성·생산성·추적성·확장성</div></div>
+      <div class="stat"><div class="stat-num">#1</div><div class="stat-label">AI 시대 QE 최우선 과제<br>AI 거버넌스 &amp; 테스트 관리</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">확장 속도<br>AI Agent 도입 후 테스트 처리량</div></div>
     </div>
-    <div class="speaker">
-      <strong>Anand Patel</strong>
-      <span>제품 디렉터, Tricentis</span>
+  </div>
+</div>
+
+<!-- ④ 핵심 문제: 4대 도전 -->
+<div class="section">
+  <div class="section-label">The Core Problem</div>
+  <div class="section-title">AI 시대 QA가 직면한<br>4가지 구조적 도전</div>
+  <p class="section-desc">AI 코딩 도구의 폭발적 확산으로 코드 생성 속도는 급증했지만, QA/품질 엔지니어링(QE)은 그 속도를 따라가지 못하고 병목이 되고 있다. NY AI Summit에서 개발자들이 "QA는 악몽, 블랙홀"이라고 직접 토로했을 정도다.</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="card-icon">💥</span>
+      <h3>코드 쓰나미</h3>
+      <p>AI 코딩 어시스턴트로 코드 생성량이 폭발적으로 증가. 코드를 만들어내는 속도는 올라갔지만 QA 단계에서 병목·정체 반복. "몇 달짜리 개발이 몇 시간으로 단축"되는 반면 QE 투자는 뒤처져 있다.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔒</span>
+      <h3>AI 생성 코드의 보안 리스크</h3>
+      <p>AI 생성 코드는 기술적으로 사람이 작성한 코드보다 보안 취약점이 더 많다. 개발자들이 즉각적 배포를 원하지만 QA 없이 배포 시 높은 롤백 비율·장애로 이어지는 현실이다.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🗂️</span>
+      <h3>파편화·사일로화</h3>
+      <p>조직 내 수십 가지 AI 도구가 동시에 사용되며 사일로화 심화. 누가 어떤 도구로 어떤 코드를 만들었는지, 테스트는 됐는지 추적 불가. 도구가 늘어날수록 복잡성만 증가한다.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🤖</span>
+      <h3>거버넌스 부재</h3>
+      <p>AI Agent들이 자율적으로 코드를 생성·테스트하는 환경에서 감독·컴플라이언스 체계가 없으면 혼란이 불가피하다. "관리 부재가 결국 조직을 망하게 할 것"이라고 발표자들은 경고한다.</p>
     </div>
   </div>
+</div>
 
+<!-- ⑤ 해결책: 테스트 관리의 진화 -->
+<div class="section-alt">
   <div class="section">
-    <h2><span class="timestamp">00:00</span> 오늘날의 혼란스러운 개발 환경</h2>
-    <p>개발 주기와 도구 환경이 극도로 확산되어 있으며, 속도와 복잡성이 동시에 증가하고 있다. 많은 것을 개발하지만 QA 단계에 도달하면 병목이 발생하고 멈추는 현상이 반복되고 있다. NY AI Summit에서 개발자들이 "QA는 악몽"이라고 직접 표현할 정도로 현장의 불만이 크다.</p>
-  </div>
+    <div class="section-label">The Solution</div>
+    <div class="section-title">테스트 관리의 진화:<br>사람 + Agent를 함께 관리하는 플랫폼</div>
+    <p class="section-desc">Tricentis는 qTest를 단순한 테스트 자산 관리 도구에서 "Agentic 워크포스 관리 플랫폼"으로 포지셔닝한다. 사람과 AI Agent가 함께 일하는 환경에서 거버넌스와 추적성을 확보하는 것이 핵심이다.</p>
 
+    <blockquote>
+      "테스트 관리는 단순히 테스트 자산을 관리하는 곳이 아니라, AI로 강화된 인력(Agentic Workforce)을 관리하는 장소가 될 것이다. Agent들이 팀원들과 함께 일하며 목표를 더 빠르고 높은 품질로 달성할 수 있도록 하는 워크스페이스가 필요하다."
+      <br><br>— Anand Patel, Tricentis 제품 디렉터
+    </blockquote>
+
+    <div class="grid grid-2" style="margin-top: 32px;">
+      <div class="card">
+        <span class="card-icon">👥</span>
+        <h3>Agent = 열정적 인턴</h3>
+        <p>Agent는 특정 작업을 매우 잘 수행하지만 조직의 맥락·관행·컴플라이언스 요구사항은 모른다. HR 프로세스처럼 온보딩, 정책 설정, 감독이 필요하다. 결국 테스트 관리가 그 역할을 맡게 된다.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔗</span>
+        <h3>MCP 서버로 도구 연결</h3>
+        <p>Tricentis는 qTest용 MCP 서버를 출시했다. AI가 접근 가능한 API로 자연어 지시만으로 소프트웨어를 조작·데이터 추출·워크플로우 자동화가 가능. 비기술직도 소프트웨어와 직접 상호작용할 수 있게 된다.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">👁️</span>
+        <h3>Human-in-the-Loop 필수</h3>
+        <p>완전 자율 Agent 테스트는 아직 먼 미래. 현실적인 목표는 반복·수동 작업을 Agent에 위임하고, 예외 상황 판단·의사결정은 사람이 담당하는 협업 모델이다.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <h3>추적성이 새로운 핵심 역량</h3>
+        <p>AI가 언제 어떤 결정을 내렸는지, 어떤 모델을 썼는지, 사람이 언제 오버라이드했는지를 완전히 추적할 수 있어야 한다. 컴플라이언스 요구사항과 규제 환경에서 특히 중요하다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑥ 웨비나 타임라인 -->
+<div class="section">
+  <div class="section-label">Discussion Flow</div>
+  <div class="section-title">30분간의 핵심 논의 흐름</div>
+  <ul class="timeline">
+    <li>
+      <span class="tl-time">00:00</span>
+      <div>
+        <div class="tl-title">오늘날의 혼란스러운 개발 환경</div>
+        <div class="tl-desc">AI 코딩 도구 확산으로 개발 주기와 도구가 폭발적으로 증가. QA 단계에서 병목 발생. NY AI Summit에서 "QA는 악몽"이라는 개발자들의 직접 토로 소개.</div>
+      </div>
+    </li>
+    <li>
+      <span class="tl-time">03:00</span>
+      <div>
+        <div class="tl-title">AI는 문제의 원인이자 해결책</div>
+        <div class="tl-desc">AI 도입은 항상 현장(Bottom-up)에서 시작되는 패턴 반복. AI 생성 코드 비율 41%는 역대 최저 수준이며 계속 증가할 것. QE 측 대응 투자가 부족하다는 진단.</div>
+      </div>
+    </li>
+    <li>
+      <span class="tl-time">07:00</span>
+      <div>
+        <div class="tl-title">테스트 관리의 4대 핵심 니즈</div>
+        <div class="tl-desc">가시성(Visibility), 생산성(Productivity), 추적성(Traceability), 확장성(Scalability) — AI 시대에 이 4가지가 최우선 관심사로 부상. qTest가 이를 해결하는 플랫폼으로 포지셔닝.</div>
+      </div>
+    </li>
+    <li>
+      <span class="tl-time">12:00</span>
+      <div>
+        <div class="tl-title">파편화·사일로화 문제와 통합 솔루션의 필요성</div>
+        <div class="tl-desc">다양한 AI 도구가 혼재하는 환경에서 거버넌스·컴플라이언스 확보 방법 논의. 이미 사용 중인 도구 안에서 Agent를 활용하는 것이 현실적인 접근법.</div>
+      </div>
+    </li>
+    <li>
+      <span class="tl-time">17:00</span>
+      <div>
+        <div class="tl-title">테스트 관리의 진화: Agentic Workforce 관리 플랫폼</div>
+        <div class="tl-desc">qTest를 "사람 + Agent를 함께 관리하는 워크스페이스"로 재정의. Agent 온보딩, 정책 설정, 모니터링, Human-Agent 워크플로우 관리가 테스트 관리의 새로운 역할로 제시.</div>
+      </div>
+    </li>
+    <li>
+      <span class="tl-time">22:00</span>
+      <div>
+        <div class="tl-title">MCP 서버 — AI와 도구를 연결하는 새로운 표준</div>
+        <div class="tl-desc">Tricentis qTest용 MCP 서버 출시. 자연어로 소프트웨어 조작 가능. Agent들이 다양한 도구에 걸쳐 견고한 워크플로우를 구축하는 핵심 기반으로 소개.</div>
+      </div>
+    </li>
+    <li>
+      <span class="tl-time">27:00</span>
+      <div>
+        <div class="tl-title">QE 직군의 미래 — 소멸이 아닌 역할 전환</div>
+        <div class="tl-desc">QE가 AI에 의해 소멸하는 것이 아니라, 반복 업무를 Agent에 위임하고 고차원적 판단·거버넌스·의사결정에 집중하는 역할로 전환된다는 결론. "수동→자동화 테스트 전환보다 더 큰 변화".</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- ⑦ 발표자 소개 -->
+<div class="section-alt">
+  <div class="section" style="padding-top:64px;padding-bottom:64px;">
+    <div class="section-label">Speakers</div>
+    <div class="section-title">발표자</div>
+    <div class="grid grid-2" style="margin-top: 32px;">
+      <div class="card">
+        <span class="card-icon">🎙️</span>
+        <h3>Luke Mahon</h3>
+        <p style="color:#2997ff;font-size:13px;margin-bottom:10px;">AI 제품 마케팅 디렉터, Tricentis</p>
+        <p>AI 시대의 QA 문제를 현장 개발자 인터뷰와 시장 데이터로 분석. NY AI Summit에서 수집한 "QA는 악몽"이라는 개발자 인식을 전달하며 문제의 심각성을 제시.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎙️</span>
+        <h3>Anand Patel</h3>
+        <p style="color:#2997ff;font-size:13px;margin-bottom:10px;">제품 디렉터 (qTest 팀 리드), Tricentis</p>
+        <p>qTest 제품팀을 이끌며 테스트 관리 플랫폼이 어떻게 Agentic AI 시대의 거버넌스 기반이 될 것인지를 제품 관점에서 상세히 설명. MCP 서버 및 워크스페이스 개념 소개.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑧ Jarvis 인사이트 -->
+<div class="section-dark">
   <div class="section">
-    <h2><span class="timestamp">07:00</span> AI는 문제의 원인이자 해결책</h2>
-    <p>새로운 도구의 도입은 항상 현장(개별 엔지니어)에서 시작되며, AI도 같은 사이클을 따르고 있다. AI 기반 기술이 기존 도구를 보완·대체하면서 환경은 더 복잡해지지만, 동시에 해결책도 제공할 것이다. 코드의 41%가 이미 AI 생성이며 이 비율은 계속 증가 중이다.</p>
-  </div>
-
-  <div class="section">
-    <h2><span class="timestamp">14:00</span> 테스트 관리의 근본적 니즈 재부상</h2>
-    <p>가시성(Visibility), 생산성(Productivity), 추적성(Traceability), 확장성(Scalability)은 테스트 관리의 4대 핵심 요구사항이다. AI로 인해 코드 볼륨이 급증하면서 이 니즈가 최우선 관심사로 부상하고 있다. Tricentis qTest가 이 문제의 해결 기반으로 포지셔닝된다.</p>
-  </div>
-
-  <div class="section">
-    <h2><span class="timestamp">21:00</span> AI 생성 코드의 리스크와 즉각적 만족의 함정</h2>
-    <p>AI 생성 코드는 기술적으로 사람이 작성한 코드보다 보안에 더 취약하다. 개발자들은 즉각적 결과에 익숙해져 QA를 우회하려는 경향이 있으며, 이는 심각한 리스크를 초래한다. 높은 롤백 비율이 실제 수치로 나타나고 있다.</p>
-  </div>
-
-  <div class="section">
-    <h2><span class="timestamp">28:00</span> Agentic AI 시대의 테스트 관리 거버넌스</h2>
-    <p>AI Agent들이 자율적으로 코드를 생성하고 배포하는 환경에서 거버넌스 없이는 혼란이 불가피하다. 방향성과 관리 체계 없이 Agent들이 제멋대로 동작하면 조직 전체가 위험에 처한다. 인간-Agent 협업 모델에서 QA 엔지니어의 역할 재정의가 필요하다.</p>
-  </div>
-
-  <div class="section">
-    <h2><span class="timestamp">34:00</span> QE 직군의 미래와 인간-AI 협업</h2>
-    <p>QE 직군이 AI로 인해 소멸할 것이라는 두려움보다는, 반복적·수동적 업무를 Agent에 위임하고 고차원적 품질 판단에 집중하는 역할 전환이 현실적인 미래다. 비즈니스 의사결정, 품질 기준 수립, 리스크 판단 등 인간 고유 영역에 집중할 수 있게 된다.</p>
-  </div>
-
-  <div class="insights">
-    <h2>🔑 주요 인사이트</h2>
-    <ul>
-      <li>AI 코딩 도구 확산으로 QA가 "블랙홀"이 되고 있다 — 개발 속도에 QA가 따라가지 못하는 구조적 병목이 심화되는 중</li>
-      <li>AI 생성 코드의 41%가 이미 현실 — 앞으로 이 비율은 "역대 가장 낮은 수준"이 될 것이며 QE 대응 역량도 비례하여 강화 필요</li>
-      <li>AI 생성 코드는 보안 취약점이 더 많다 — 무조건적 신뢰는 위험, QA 없이 바로 배포하는 것은 조직 리스크</li>
-      <li>도구 도입은 Bottom-up, 통제는 Top-down — 현장에서 시작된 AI 도구가 조직 표준으로 안착하려면 거버넌스 체계가 필수</li>
-      <li>"즉각적 만족" vs. 리스크 관리 — 개발자의 속도 욕구와 QA 필요성 사이의 간극을 줄이려면 QA 자체의 속도·자동화 수준을 높여야</li>
-      <li>Agentic AI 거버넌스 = 테스트 관리 — Agent 기반 개발 환경에서 가시성·추적성이 없으면 품질 보증이 불가능</li>
+    <div class="section-label" style="color:#2997ff;">Jarvis Analysis</div>
+    <div class="section-title" style="color:#f5f5f7;">PerfecTwin 관점<br>시사점 &amp; 전략적 함의</div>
+    <p class="section-desc">이 웨비나가 PerfecTwin ERP Edition 전략에 미치는 영향 분석.</p>
+    <ul class="insight-list">
+      <li>
+        <span class="insight-icon">📌</span>
+        <span class="insight-text"><strong>이 웨비나의 성격:</strong> 제품 데모 없는 순수 사상/전략 리더십 콘텐츠. Tricentis가 qTest를 "AI 시대 테스트 거버넌스 플랫폼"으로 재포지셔닝하기 위한 수요 창출 목적. 신기능 발표는 없고, 고객 사고방식을 변화시키는 데 집중.</span>
+      </li>
+      <li>
+        <span class="insight-icon">⚠️</span>
+        <span class="insight-text"><strong>qTest + MCP 조합이 위협 포인트:</strong> qTest MCP 서버 출시로 자연어로 테스트 관리 조작이 가능해졌다. Cursor, GitHub Copilot 등 개발자 도구에서 직접 qTest를 호출하는 환경이 되면, 개발자와 QE 사이의 도구 경계가 허물어진다.</span>
+      </li>
+      <li>
+        <span class="insight-icon">🔑</span>
+        <span class="insight-text"><strong>"41%가 역대 최저" 메시지의 전략적 의미:</strong> Tricentis는 AI 코드 생성 비율 증가를 자사 제품 도입 근거로 적극 활용하고 있다. 동일한 논리를 PerfecTwin ERP Edition 영업에 활용 가능 — "SAP ERP 환경에서 AI 생성 코드와 변경 사항이 폭증할 때 PerfecTwin으로 회귀 테스트를 자동화".</span>
+      </li>
+      <li>
+        <span class="insight-icon">💡</span>
+        <span class="insight-text"><strong>차별화 포인트:</strong> Tricentis qTest는 <strong>새로운 Agent 워크포스 관리</strong>에 강점. PerfecTwin은 <strong>이미 운영 중인 SAP ERP의 실거래 기반 회귀 테스트 자동화</strong>에 강점. 신규 구축 거버넌스는 qTest, 기존 운영 시스템 변경 검증은 PerfecTwin으로 포지셔닝 분리 가능.</span>
+      </li>
+      <li>
+        <span class="insight-icon">📅</span>
+        <span class="insight-text"><strong>주목할 타이밍:</strong> Tricentis가 "조만간 의미 있는 진전을 보게 될 것"이라고 예고. 하반기 qTest Agent 신기능 발표가 예상됨. Tricentis의 다음 웨비나와 릴리즈 노트를 지속 모니터링할 것.</span>
+      </li>
     </ul>
   </div>
-
-  <div class="jarvis">
-    <h2>🤵 Jarvis 분석 메모</h2>
-    <p>이 웨비나는 Tricentis가 qTest를 "Agentic AI 시대의 필수 테스트 관리 플랫폼"으로 포지셔닝하기 위한 수요 창출(Demand Gen) 콘텐츠입니다. PerfecTwin ERP Edition 관점에서 주목할 포인트: AI 생성 코드 증가에 따른 SAP ERP 환경의 테스트 부담 증가 → PerfecTwin의 자동 캡처/재현 가치 제안과 직결됩니다. Tricentis가 qTest를 전면에 내세우는 것은 Tosca 이외의 포트폴리오 확장 전략을 의미합니다.</p>
-  </div>
 </div>
+
+<!-- 푸터 -->
+<footer>
+  <p>🤵 Jarvis 기술 분석 리포트 · 2026.03.04 · <a href="https://www.tricentis.com/resources/test-management-foundational-agentic-ai" target="_blank">원본 웨비나 ↗</a> · <a href="index.html">← Tosca Cloud 웨비나</a></p>
+</footer>
 
 </body>
 </html>
