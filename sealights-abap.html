@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tricentis 웨비나: 클라우드 기반 SAP 변경 영향 분석: SeaLights for ABAP 소개</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    background: #fff;
+    color: #1d1d1f;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── 영상 플레이어 (스티키) ── */
+  #video-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #000;
+  }
+  #video-wrap video {
+    width: 100%;
+    display: block;
+    max-height: 56vw;
+  }
+  .video-bar {
+    background: #1d1d1f;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .video-bar span { color: #86868b; font-size: 13px; }
+  .video-bar a {
+    margin-left: auto;
+    color: #2997ff;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .video-bar a:hover { text-decoration: underline; }
+
+  /* ── 히어로 ── */
+  .hero {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 80px 24px 64px;
+  }
+  .hero-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #2997ff;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 5vw, 50px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    max-width: 820px;
+    margin: 0 auto 20px;
+  }
+  .hero-sub {
+    color: #86868b;
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+  .hero-chips {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .chip {
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+  }
+
+  /* ── 섹션 공통 ── */
+  .section { padding: 80px 24px; max-width: 980px; margin: 0 auto; }
+  .section-alt { background: #f5f5f7; }
+  .section-dark { background: #1d1d1f; color: #f5f5f7; }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #6e6e73;
+    margin-bottom: 8px;
+  }
+  .section-dark .section-label { color: #86868b; }
+  .section-title {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-desc {
+    color: #6e6e73;
+    font-size: 17px;
+    max-width: 680px;
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+  .section-dark .section-desc { color: #86868b; }
+
+  /* ── 카드 그리드 ── */
+  .grid { display: grid; gap: 20px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.06);
+  }
+  .card-dark {
+    background: #2c2c2e;
+    border-radius: 18px;
+    padding: 28px;
+  }
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -.01em;
+  }
+  .card p, .card li {
+    font-size: 15px;
+    color: #6e6e73;
+    line-height: 1.6;
+  }
+  .card-dark p, .card-dark li { color: #86868b; }
+  .card-dark h3 { color: #f5f5f7; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { padding: 6px 0; border-bottom: 1px solid #f0f0f2; }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li::before { content: "→ "; color: #2997ff; font-size: 13px; }
+
+  /* ── 수치 강조 ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2px; margin: 40px 0; }
+  .stat {
+    background: #f5f5f7;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .section-dark .stat { background: #2c2c2e; }
+  .stat-num {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    color: #1d1d1f;
+    line-height: 1;
+  }
+  .section-dark .stat-num { color: #f5f5f7; }
+  .stat-label {
+    font-size: 13px;
+    color: #6e6e73;
+    margin-top: 6px;
+  }
+
+  /* ── 타임라인 ── */
+  .timeline { list-style: none; padding: 0; }
+  .timeline li {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f2;
+    align-items: flex-start;
+  }
+  .timeline li:last-child { border-bottom: none; }
+  .tl-time {
+    font-size: 13px;
+    color: #2997ff;
+    font-weight: 600;
+    min-width: 52px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+  .tl-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .tl-desc { font-size: 14px; color: #6e6e73; line-height: 1.5; }
+
+  /* ── Jarvis 인사이트 ── */
+  .insight-list { list-style: none; padding: 0; }
+  .insight-list li {
+    padding: 20px 0;
+    border-bottom: 1px solid #2c2c2e;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .insight-list li:last-child { border-bottom: none; }
+  .insight-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .insight-text { font-size: 15px; color: #ababab; line-height: 1.6; }
+  .insight-text strong { color: #f5f5f7; }
+
+  /* ── 인용 ── */
+  blockquote {
+    border-left: 3px solid #2997ff;
+    padding: 16px 20px;
+    margin: 24px 0;
+    background: #f5f5f7;
+    border-radius: 0 12px 12px 0;
+    font-size: 15px;
+    color: #3d3d3f;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ── 푸터 ── */
+  footer {
+    background: #f5f5f7;
+    border-top: 1px solid #e8e8ed;
+    padding: 32px 24px;
+    text-align: center;
+    color: #6e6e73;
+    font-size: 13px;
+  }
+  footer a { color: #2997ff; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 56px 20px 48px; }
+    .section { padding: 56px 20px; }
+    .stat-num { font-size: 36px; }
+    .video-bar { padding: 8px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ① 스티키 영상 -->
+<div id="video-wrap">
+  <video controls preload="metadata" playsinline webkit-playsinline>
+    <source src="https://github.com/spring7day/jarvis-media/releases/download/v13.0/tw13-ko-final.mp4" type="video/mp4">
+  </video>
+  <div class="video-bar">
+    <span>🎬 한국어 자막 · 720p</span>
+    <a href="https://github.com/spring7day/jarvis-media/releases/download/v13.0/tw13-ko-final.mp4" download>MP4 다운로드 ↓</a>
+  </div>
+</div>
+
+<!-- ② 히어로 -->
+<div class="hero">
+  <div class="hero-label">Tricentis 웨비나 · 2025</div>
+  <h1>Introducing cloud-based SAP Change Impact Analysis with Tricentis SeaLights for ABAP</h1>
+  <p class="hero-sub">SeaLights / SAP — Tricentis</p>
+  <div class="hero-chips">
+    <span class="chip">SeaLights</span>
+    <span class="chip">ABAP</span>
+    <span class="chip">SAP</span>
+    <span class="chip">변경 영향 분석</span>
+    <span class="chip">S/4HANA</span>
+    <span class="chip">Jarvis 기술 분석</span>
+  </div>
+</div>
+
+<!-- ③ 핵심 수치 -->
+<div class="section-alt">
+  <div class="section" style="padding-top:64px;padding-bottom:64px;">
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">ABAP</div><div class="stat-label">ABAP 코드 분석<br>클라우드 기반 SaaS</div></div>
+      <div class="stat"><div class="stat-num">CIA</div><div class="stat-label">Change Impact Analysis<br>변경 영향 범위 정밀 분석</div></div>
+      <div class="stat"><div class="stat-num">TGA</div><div class="stat-label">Test Gap Analysis<br>미테스트 변경 탐지</div></div>
+      <div class="stat"><div class="stat-num">S/4</div><div class="stat-label">S/4HANA 전환 지원<br>커버리지 갭 식별</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ④ 핵심 문제 -->
+<div class="section">
+  <div class="section-label">The Core Problem</div>
+  <div class="section-title">클라우드 기반 SAP 변경 영향 분석: SeaLights for ABAP 소개</div>
+  <p class="section-desc">클라우드 기반 SAP 변경 영향 분석: SeaLights for ABAP 소개</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="card-icon">🔍</span>
+      <h3>SAP 변경 영향 파악 불가</h3>
+      <p>ABAP 코드와 비코드 변경이 SAP 환경 전체에 미치는 영향을 정확히 파악하기 어렵다. 어떤 테스트가 영향을 받는지 모른다.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⏱️</span>
+      <h3>불필요한 회귀 테스트</h3>
+      <p>변경 영향을 모르니 전체 회귀 테스트를 실행. 시간과 비용이 낭비된다.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔒</span>
+      <h3>S/4HANA 전환 리스크</h3>
+      <p>대규모 S/4HANA 전환에서 코드 변경과 커버리지 갭에 대한 데이터 기반 인사이트가 부족하다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ⑤ 해결책 -->
+<div class="section-alt">
+  <div class="section">
+    <div class="section-label">The Solution</div>
+    <div class="section-title">Tricentis의 접근 방식</div>
+    <div class="grid grid-2" style="margin-top: 32px;">
+      <div class="card">
+        <span class="card-icon">🔗</span>
+        <h3>클라우드 기반 ABAP 분석</h3>
+        <p>SeaLights for ABAP가 SAP 환경의 ABAP 코드와 비코드 변경을 클라우드에서 분석. SaaS 기반으로 인프라 부담 없이 도입 가능하다.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <h3>Test Gap Analysis</h3>
+        <p>테스트되지 않은 ABAP 코드 변경을 자동 탐지하고 블라인드 스팟을 노출. 정확히 어떤 테스트가 변경에 영향을 받는지 식별한다.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <h3>스마트 우선순위 지정</h3>
+        <p>변경에 의해 영향을 받는 테스트만 정확히 식별하여 불필요한 회귀 테스트를 제거. 고위험 영역에 테스트를 집중한다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑦ Jarvis 인사이트 -->
+<div class="section-dark">
+  <div class="section">
+    <div class="section-label" style="color:#2997ff;">Jarvis Analysis</div>
+    <div class="section-title" style="color:#f5f5f7;">PerfecTwin 관점<br>시사점 &amp; 전략적 함의</div>
+    <p class="section-desc">이 리소스가 PerfecTwin ERP Edition 전략에 미치는 영향 분석.</p>
+    <ul class="insight-list">
+      <li>
+        <span class="insight-icon">📌</span>
+        <span class="insight-text"><strong>직접 경쟁 제품:</strong> SeaLights for ABAP는 PerfecTwin ERP Edition과 가장 직접적으로 경쟁하는 제품. 두 제품 모두 SAP ABAP 환경에서 변경 영향 분석과 테스트 최적화를 제공한다.</span>
+      </li>
+      <li>
+        <span class="insight-icon">⚠️</span>
+        <span class="insight-text"><strong>차별화 포인트:</strong> SeaLights는 코드 레벨 분석(정적 분석)에 강점, PerfecTwin은 실거래 데이터 기반 분석(동적 분석)에 강점. SeaLights가 '어떤 코드가 변경되었는가'를 보여준다면, PerfecTwin은 '어떤 비즈니스 프로세스가 영향을 받는가'를 보여준다.</span>
+      </li>
+      <li>
+        <span class="insight-icon">💡</span>
+        <span class="insight-text"><strong>대응 전략:</strong> SeaLights의 코드 레벨 분석만으로는 SAP 비즈니스 프로세스의 복잡한 의존성을 완전히 파악할 수 없음을 강조. PerfecTwin의 실거래 기반 접근이 비즈니스 리스크를 더 정확히 반영한다는 점을 부각할 것.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 푸터 -->
+<footer>
+  <p>🤵 Jarvis 기술 분석 리포트 · 2025-11-10 · <a href="https://www.tricentis.com/resources/sealights-for-abap-webinar" target="_blank">원본 리소스 ↗</a> · <a href="webinars.html">← 전체 웨비나 목록</a></p>
+</footer>
+
+
+</body>
+</html>
